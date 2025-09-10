@@ -3,13 +3,13 @@
 ## 📋 Prerequisites
 - GitHub account
 - Git installed on your machine
-- Node.js 18+ installed
+- Node.js 20+ installed
 
 ## 🎯 Quick Deployment Steps
 
 ### Step 1: Create GitHub Repository
 1. Go to [GitHub](https://github.com) and create a new repository
-2. Name it: `Iloveyounanna`
+2. Name it: `iloveyounanna` (lowercase, matching your desired domain)
 3. Make it **public** (required for free GitHub Pages)
 4. Don't initialize with README (we already have files)
 
@@ -25,7 +25,7 @@ git add .
 git commit -m "Initial commit: Beautiful love-themed birthday website"
 
 # Add your GitHub repository as remote
-git remote add origin https://github.com/YOUR_USERNAME/Iloveyounanna.git
+git remote add origin https://github.com/YOUR_USERNAME/iloveyounanna.git
 
 # Push to GitHub
 git push -u origin main
@@ -42,12 +42,18 @@ git push -u origin main
 The GitHub Actions workflow (`.github/workflows/deploy.yml`) will automatically:
 - Build your Next.js application
 - Deploy it to GitHub Pages
-- Make it available at: `https://YOUR_USERNAME.github.io/Iloveyounanna/`
+- Configure the custom domain: `iloveyounanna.github.io`
 
 ## 🌐 Your Website Will Be Live At:
 ```
-https://YOUR_USERNAME.github.io/Iloveyounanna/
+https://iloveyounanna.github.io/
 ```
+
+### Important Notes for Custom Domain:
+- The repository name must be `iloveyounanna` (lowercase)
+- The CNAME file is automatically included in the build
+- GitHub Pages will automatically configure the custom domain
+- It may take a few minutes for the domain to become active
 
 ## 🔧 Manual Deployment (Alternative)
 

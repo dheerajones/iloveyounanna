@@ -10,8 +10,8 @@ const nextConfig: NextConfig = {
   // GitHub Pages configuration
   output: 'export',
   trailingSlash: true,
-  // Base path for GitHub Pages (uncomment if deploying to github.io subdirectory)
-  basePath: '/Iloveyounanna',
+  // Base path for GitHub Pages (removed for custom domain)
+  // basePath: '/Iloveyounanna',
   images: {
     unoptimized: true // Required for static export
   },
