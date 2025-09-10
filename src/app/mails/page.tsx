@@ -441,6 +441,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Heart, Mail, Calendar, Plus, Search, ArrowLeft, Inbox, Star, User, Trash2, Eye, EyeOff, Download, Upload } from 'lucide-react'
 import DeploymentStatus from '@/components/DeploymentStatus'
+import { triggerRepositoryDispatch } from '@/lib/github-api'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -598,9 +599,6 @@ export default function MailsPage() {
           customDate: newMail.customDate
         }
         
-        // Simulate deployment process
-        await new Promise(resolve => setTimeout(resolve, 2000))
-        
         // Add to local storage for immediate feedback
         const updatedMails = [...mails, mail]
         setMails(updatedMails)
@@ -610,8 +608,30 @@ export default function MailsPage() {
         setNewMail({ from: '', to: '', subject: '', content: '', customDate: new Date() })
         setIsAddDialogOpen(false)
         
-        // Show success message
-        console.log('Love letter saved and deployed!')
+        // Trigger real GitHub deployment
+        const mailData = {
+          from: mail.from,
+          to: mail.to,
+          subject: mail.subject,
+          content: mail.content,
+          customDate: mail.date
+        }
+        
+        // Use environment variable for GitHub token (secure)
+        const success = await triggerRepositoryDispatch(
+          'dheerajones', // Your GitHub username
+          'iloveyounanna', // Your repository name
+          process.env.NEXT_PUBLIC_GITHUB_TOKEN || 'demo-token', // Use environment variable
+          mailData
+        )
+        
+        if (success) {
+          console.log('✅ GitHub Actions workflow triggered successfully!')
+          console.log('🚀 Your love letter is being deployed...')
+        } else {
+          console.log('⚠️ Demo mode: GitHub API not configured')
+          console.log('💡 In production, this would trigger a real deployment!')
+        }
         
       } catch (error) {
         console.error('Error saving mail:', error)

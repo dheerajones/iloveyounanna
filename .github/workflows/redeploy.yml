@@ -11,9 +11,10 @@ on:
     types: [new-mail]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: "pages"
@@ -26,6 +27,43 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Save new mail data
+      if: github.event_name == 'repository_dispatch'
+      run: |
+        # Create data directory if it doesn't exist
+        mkdir -p data
+        
+        # Get mail data from repository dispatch
+        MAIL_DATA='${{ toJson(github.event.client_payload.mail) }}'
+        
+        # Create new mail entry with proper structure
+        NEW_MAIL=$(echo "$MAIL_DATA" | jq '. + {
+          id: (now | tostring),
+          timestamp: (now | strftime("%I:%M %p")),
+          starred: false,
+          read: false,
+          date: .customDate
+        }')
+        
+        # Add the new mail to the existing mails.json file
+        if [ -f "data/mails.json" ]; then
+          # Read existing mails and append new one
+          EXISTING_MAILS=$(cat data/mails.json)
+          echo "$EXISTING_MAILS" | jq ". + [$NEW_MAIL]" > data/mails.json
+        else
+          # Create new file with the new mail
+          echo "[$NEW_MAIL]" > data/mails.json
+        fi
+        
+        # Commit the changes
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/mails.json
+        git commit -m "Add new love letter: ${{ github.event.client_payload.mail.subject }}" || exit 0
+        git push
       
     - name: Setup Node.js
       uses: actions/setup-node@v4
