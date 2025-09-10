@@ -1,0 +1,56 @@
+name: Redeploy on New Mail
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for redeployment'
+        required: false
+        default: 'New love letter added'
+  repository_dispatch:
+    types: [new-mail]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build application
+      run: npm run build
+      
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./out
+        
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
+      
+    - name: Notify deployment complete
+      run: |
+        echo "🚀 Deployment completed successfully!"
+        echo "New love letter is now live on the website!"

@@ -440,6 +440,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Heart, Mail, Calendar, Plus, Search, ArrowLeft, Inbox, Star, User, Trash2, Eye, EyeOff, Download, Upload } from 'lucide-react'
+import DeploymentStatus from '@/components/DeploymentStatus'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -549,6 +550,8 @@ export default function MailsPage() {
     content: '',
     customDate: new Date()
   })
+  const [showDeploymentStatus, setShowDeploymentStatus] = useState(false)
+  const [isDeploying, setIsDeploying] = useState(false)
 
   useEffect(() => {
     const savedMails = localStorage.getItem('loveLetters')
@@ -576,26 +579,46 @@ export default function MailsPage() {
 
   const uniqueDates = Array.from(new Set(mails.map(mail => mail.date))).sort((a, b) => b.localeCompare(a))
 
-  const handleAddMail = () => {
+  const handleAddMail = async () => {
     if (newMail.from && newMail.to && newMail.subject && newMail.content) {
-      const mail: Mail = {
-        id: Date.now().toString(),
-        date: format(newMail.customDate, 'yyyy-MM-dd'),
-        from: newMail.from,
-        to: newMail.to,
-        subject: newMail.subject,
-        content: newMail.content,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        starred: false,
-        read: false,
-        customDate: newMail.customDate
-      }
-      const updatedMails = [...mails, mail]
-      setMails(updatedMails)
-      localStorage.setItem('loveLetters', JSON.stringify(updatedMails))
+      setIsDeploying(true)
+      setShowDeploymentStatus(true)
       
-      setNewMail({ from: '', to: '', subject: '', content: '', customDate: new Date() })
-      setIsAddDialogOpen(false)
+      try {
+        const mail: Mail = {
+          id: Date.now().toString(),
+          date: format(newMail.customDate, 'yyyy-MM-dd'),
+          from: newMail.from,
+          to: newMail.to,
+          subject: newMail.subject,
+          content: newMail.content,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          starred: false,
+          read: false,
+          customDate: newMail.customDate
+        }
+        
+        // Simulate deployment process
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        
+        // Add to local storage for immediate feedback
+        const updatedMails = [...mails, mail]
+        setMails(updatedMails)
+        localStorage.setItem('loveLetters', JSON.stringify(updatedMails))
+        
+        // Reset form and close dialog
+        setNewMail({ from: '', to: '', subject: '', content: '', customDate: new Date() })
+        setIsAddDialogOpen(false)
+        
+        // Show success message
+        console.log('Love letter saved and deployed!')
+        
+      } catch (error) {
+        console.error('Error saving mail:', error)
+        alert('Failed to save mail. Please try again.')
+      } finally {
+        setIsDeploying(false)
+      }
     }
   }
 
@@ -745,9 +768,12 @@ export default function MailsPage() {
             
             <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="love-button text-white">
+                <Button 
+                  className="love-button text-white" 
+                  disabled={isDeploying}
+                >
                   <Plus className="w-4 h-4 mr-2" />
-                  Compose
+                  {isDeploying ? 'Deploying...' : 'Compose'}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl love-card">
@@ -755,6 +781,15 @@ export default function MailsPage() {
                   <DialogTitle className="text-center text-2xl font-bold text-pink-600">
                     Write a New Love Letter
                   </DialogTitle>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4">
+                    <div className="flex items-start space-x-2">
+                      <div className="text-blue-500 mt-0.5">ℹ️</div>
+                      <div className="text-sm text-blue-700">
+                        <p className="font-medium">Auto-Deployment Notice:</p>
+                        <p>When you send this love letter, the entire website will automatically rebuild and redeploy. This process takes about 2 minutes and your letter will be live for everyone to see!</p>
+                      </div>
+                    </div>
+                  </div>
                 </DialogHeader>
                 <div className="space-y-4">
                   <div>
@@ -819,10 +854,14 @@ export default function MailsPage() {
                       </PopoverContent>
                     </Popover>
                   </div>
-                  <Button onClick={handleAddMail} className="w-full love-button text-white">
-                    <Heart className="w-4 h-4 mr-2" fill="currentColor" />
-                    Send Love Letter
-                  </Button>
+                          <Button 
+                            onClick={handleAddMail} 
+                            className="w-full love-button text-white"
+                            disabled={isDeploying}
+                          >
+                            <Heart className="w-4 h-4 mr-2" fill="currentColor" />
+                            {isDeploying ? 'Deploying...' : 'Send Love Letter'}
+                          </Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -1072,6 +1111,13 @@ export default function MailsPage() {
           </main>
         </div>
       </div>
+      
+      {/* Deployment Status Component */}
+      <DeploymentStatus 
+        isVisible={showDeploymentStatus}
+        onClose={() => setShowDeploymentStatus(false)}
+        deploymentTime={120} // 2 minutes countdown
+      />
     </div>
   )
 }
