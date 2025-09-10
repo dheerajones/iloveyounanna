@@ -196,7 +196,7 @@
 //         <header className="gmail-header">
 //           <div className="flex items-center space-x-4">
 //             <Button variant="ghost" size="sm" asChild>
-//               <a href="/" className="flex items-center space-x-2">
+//               <a href="/iloveyounanna/" className="flex items-center space-x-2">
 //                 <ArrowLeft className="w-4 h-4" />
 //                 <span>Back Home</span>
 //               </a>
@@ -635,7 +635,7 @@ export default function MailsPage() {
         <header className="gmail-header">
           <div className="flex items-center space-x-4">
             <Button variant="ghost" size="sm" asChild>
-              <a href="/" className="flex items-center space-x-2">
+              <a href="/iloveyounanna/" className="flex items-center space-x-2">
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back Home</span>
               </a>

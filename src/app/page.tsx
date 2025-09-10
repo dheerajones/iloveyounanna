@@ -470,7 +470,7 @@ export default function Home() {
               Distance means so little when someone means so much. Here's our collection of heartfelt messages that bridge the miles between us.
             </p>
             <Button size="lg" className="love-button text-white" asChild>
-              <a href="/mails">
+              <a href="/iloveyounanna/mails">
                 <Mail className="mr-2" />
                 Read Our Letters
               </a>
