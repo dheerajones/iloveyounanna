@@ -7,12 +7,16 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
 // Timeline data using your actual images
+const getImagePath = (imageName: string) => {
+  return process.env.NODE_ENV === 'production' ? `/iloveyounanna/images/${imageName}` : `/images/${imageName}`
+}
+
 const timelineData = [
   {
     id: 1,
     title: 'Her Radiant Beauty',
     description: 'Your stunning smile lights up every room and captures hearts effortlessly.',
-    image: '/images/Screenshot_20240802_153412.jpg',
+    image: getImagePath('Screenshot_20240802_153412.jpg'),
     category: 'milestone',
     location: 'Special Moment'
   },
@@ -20,7 +24,7 @@ const timelineData = [
     id: 2,
     title: 'Evening Goddess',
     description: 'You transform ordinary evenings into magical moments with your enchanting presence.',
-    image: '/images/IMG20240804211231.jpg',
+    image: getImagePath('IMG20240804211231.jpg'),
     category: 'romantic',
     location: 'Twilight Hours'
   },
@@ -28,7 +32,7 @@ const timelineData = [
     id: 3,
     title: 'Morning Sunshine',
     description: 'Your natural beauty shines brighter than any sunrise, bringing joy to every day.',
-    image: '/images/IMG20240907115728.jpg',
+    image: getImagePath('IMG20240907115728.jpg'),
     category: 'adventure',
     location: 'Full Day Together'
   },
@@ -36,7 +40,7 @@ const timelineData = [
     id: 4,
     title: 'Intellectual Beauty',
     description: 'Your intelligence and grace make even the most mundane activities feel special.',
-    image: '/images/Screenshot_20240912_112530.jpg',
+    image: getImagePath('Screenshot_20240912_112530.jpg'),
     category: 'lifestyle',
     location: 'Learning Together'
   },
@@ -44,7 +48,7 @@ const timelineData = [
     id: 5,
     title: 'Nature\'s Masterpiece',
     description: 'You blend perfectly with nature\'s beauty, creating scenes more beautiful than any painting.',
-    image: '/images/Screenshot_20241207_002444.jpg',
+    image: getImagePath('Screenshot_20241207_002444.jpg'),
     category: 'nature',
     location: 'Garden Paradise'
   },
@@ -52,7 +56,7 @@ const timelineData = [
     id: 6,
     title: 'Spring\'s Muse',
     description: 'Like spring itself, you bring renewal, hope, and endless beauty wherever you go.',
-    image: '/images/IMG_20250320_174632.jpg',
+    image: getImagePath('IMG_20250320_174632.jpg'),
     category: 'seasonal',
     location: 'Spring Joy'
   },
@@ -60,7 +64,7 @@ const timelineData = [
     id: 7,
     title: 'Urban Angel',
     description: 'You make city streets look like runways with your effortless style and grace.',
-    image: '/images/IMG20250813112650.jpg',
+    image: getImagePath('IMG20250813112650.jpg'),
     category: 'fashion',
     location: 'City Streets'
   }

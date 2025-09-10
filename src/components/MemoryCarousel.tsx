@@ -8,45 +8,49 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
 // Carousel data with your beautiful images
+const getImagePath = (imageName: string) => {
+  return process.env.NODE_ENV === 'production' ? `/iloveyounanna/images/${imageName}` : `/images/${imageName}`
+}
+
 const carouselData = [
   {
     id: 1,
-    image: '/images/Screenshot_20240802_153412.jpg',
+    image: getImagePath('Screenshot_20240802_153412.jpg'),
     title: 'Her Stunning Smile',
     subtitle: 'A smile that lights up the world',
     quote: 'Your beauty is beyond words, your smile is pure magic.'
   },
   {
     id: 2,
-    image: '/images/IMG20240804211231.jpg',
+    image: getImagePath('IMG20240804211231.jpg'),
     title: 'Evening Goddess',
     subtitle: 'Twilight perfection personified',
     quote: 'You are the most beautiful woman I have ever seen.'
   },
   {
     id: 3,
-    image: '/images/Screenshot_20240912_112530.jpg',
+    image: getImagePath('Screenshot_20240912_112530.jpg'),
     title: 'Intellectual Beauty',
     subtitle: 'Grace and intelligence combined',
     quote: 'Your mind is as beautiful as your face.'
   },
   {
     id: 4,
-    image: '/images/Screenshot_20241207_002444.jpg',
+    image: getImagePath('Screenshot_20241207_002444.jpg'),
     title: 'Nature\'s Masterpiece',
     subtitle: 'Beauty that rivals nature itself',
     quote: 'You make flowers jealous with your natural beauty.'
   },
   {
     id: 5,
-    image: '/images/IMG_20250320_174632.jpg',
+    image: getImagePath('IMG_20250320_174632.jpg'),
     title: 'Spring\'s Muse',
     subtitle: 'Fresh and radiant like morning dew',
     quote: 'Your beauty renews my soul every day.'
   },
   {
     id: 6,
-    image: '/images/IMG20250813112650.jpg',
+    image: getImagePath('IMG20250813112650.jpg'),
     title: 'Urban Angel',
     subtitle: 'Style and grace in every step',
     quote: 'You turn every street into a runway.'

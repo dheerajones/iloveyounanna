@@ -74,7 +74,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 hero-banner"
             style={{
-              backgroundImage: `url('/herobanner.jpeg')`,
+              backgroundImage: `url('${process.env.NODE_ENV === 'production' ? '/iloveyounanna/herobanner.jpeg' : '/herobanner.jpeg'}')`,
               transform: 'rotate(-90deg)',
               transformOrigin: 'center center',
               width: '100vh',

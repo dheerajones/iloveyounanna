@@ -8,108 +8,112 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
 // Your beautiful images with metadata
+const getImagePath = (imageName: string) => {
+  return process.env.NODE_ENV === 'production' ? `/iloveyounanna/images/${imageName}` : `/images/${imageName}`
+}
+
 const photoData = [
   {
     id: 1,
-    src: '/images/Screenshot_20240802_153412.jpg',
+    src: getImagePath('Screenshot_20240802_153412.jpg'),
     caption: 'Radiant Beauty',
     location: 'Special Moment',
     category: 'portrait'
   },
   {
     id: 2,
-    src: '/images/Screenshot_20240912_112530.jpg',
+    src: getImagePath('Screenshot_20240912_112530.jpg'),
     caption: 'Intellectual Grace',
     location: 'Study Session',
     category: 'lifestyle'
   },
   {
     id: 3,
-    src: '/images/Screenshot_20241207_002444.jpg',
+    src: getImagePath('Screenshot_20241207_002444.jpg'),
     caption: 'Nature\'s Muse',
     location: 'Nature Walk',
     category: 'nature'
   },
   {
     id: 4,
-    src: '/images/Screenshot_20241207_002504.jpg',
+    src: getImagePath('Screenshot_20241207_002504.jpg'),
     caption: 'Garden Goddess',
     location: 'Evening Stroll',
     category: 'nature'
   },
   {
     id: 5,
-    src: '/images/Snapchat-530430530.jpg',
+    src: getImagePath('Snapchat-530430530.jpg'),
     caption: 'Adventure Queen',
     location: 'Exploring Together',
     category: 'adventure'
   },
   {
     id: 6,
-    src: '/images/Snapchat-771023813.jpg',
+    src: getImagePath('Snapchat-771023813.jpg'),
     caption: 'Golden Hour Angel',
     location: 'Sunset Magic',
     category: 'golden'
   },
   {
     id: 7,
-    src: '/images/Snapchat-1232431141.jpg',
+    src: getImagePath('Snapchat-1232431141.jpg'),
     caption: 'Casual Elegance',
     location: 'Comfort Zone',
     category: 'casual'
   },
   {
     id: 8,
-    src: '/images/Snapchat-1973358956.jpg',
+    src: getImagePath('Snapchat-1973358956.jpg'),
     caption: 'Traditional Princess',
     location: 'Heritage',
     category: 'traditional'
   },
   {
     id: 9,
-    src: '/images/Snapchat-1977403721.jpg',
+    src: getImagePath('Snapchat-1977403721.jpg'),
     caption: 'Sweet Angel',
     location: 'Heart to Heart',
     category: 'romantic'
   },
   {
     id: 10,
-    src: '/images/IMG20250813112650.jpg',
+    src: getImagePath('IMG20250813112650.jpg'),
     caption: 'Fashion Icon',
     location: 'Urban Adventure',
     category: 'fashion'
   },
   {
     id: 11,
-    src: '/images/IMG20240804211231.jpg',
+    src: getImagePath('IMG20240804211231.jpg'),
     caption: 'Evening Star',
     location: 'Twilight Magic',
     category: 'evening'
   },
   {
     id: 12,
-    src: '/images/IMG20240804221103.jpg',
+    src: getImagePath('IMG20240804221103.jpg'),
     caption: 'Night Beauty',
     location: 'Late Night',
     category: 'night'
   },
   {
     id: 13,
-    src: '/images/IMG20240907115728.jpg',
+    src: getImagePath('IMG20240907115728.jpg'),
     caption: 'Morning Sunshine',
     location: 'Fresh Start',
     category: 'morning'
   },
   {
     id: 14,
-    src: '/images/IMG20240907132447.jpg',
+    src: getImagePath('IMG20240907132447.jpg'),
     caption: 'Afternoon Grace',
     location: 'Peaceful Moment',
     category: 'afternoon'
   },
   {
     id: 15,
-    src: '/images/IMG_20250320_174632.jpg',
+    src: getImagePath('IMG_20250320_174632.jpg'),
     caption: 'Spring Goddess',
     location: 'Seasonal Beauty',
     category: 'seasonal'
