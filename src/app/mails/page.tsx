@@ -439,7 +439,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Heart, Mail, Calendar, Plus, Search, ArrowLeft, Inbox, Star, User, Trash2, Eye, EyeOff } from 'lucide-react'
+import { Heart, Mail, Calendar, Plus, Search, ArrowLeft, Inbox, Star, User, Trash2, Eye, EyeOff, Download, Upload } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -633,6 +633,43 @@ export default function MailsPage() {
     }
   }
 
+  const exportData = () => {
+    const dataStr = JSON.stringify(mails, null, 2)
+    const dataBlob = new Blob([dataStr], { type: 'application/json' })
+    const url = URL.createObjectURL(dataBlob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `love-letters-${new Date().toISOString().split('T')[0]}.json`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
+  const importData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const importedMails = JSON.parse(e.target?.result as string)
+        if (Array.isArray(importedMails)) {
+          setMails(importedMails)
+          localStorage.setItem('loveLetters', JSON.stringify(importedMails))
+          alert('Love letters imported successfully!')
+        } else {
+          alert('Invalid file format. Please select a valid love letters file.')
+        }
+      } catch (error) {
+        alert('Error reading file. Please make sure it\'s a valid JSON file.')
+      }
+    }
+    reader.readAsText(file)
+    // Reset the input
+    event.target.value = ''
+  }
+
   return (
     <div className="min-h-screen love-pattern">
       <div className="love-symbols">
@@ -670,6 +707,39 @@ export default function MailsPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 w-64"
+              />
+            </div>
+            
+            {/* Export/Import Buttons */}
+            <div className="flex items-center space-x-2">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={exportData}
+                className="border-white text-white hover:bg-white hover:text-pink-600"
+                title="Export love letters to file"
+              >
+                <Download className="w-4 h-4 mr-1" />
+                Export
+              </Button>
+              
+              <label htmlFor="import-file">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="border-white text-white hover:bg-white hover:text-pink-600 cursor-pointer"
+                  title="Import love letters from file"
+                >
+                  <Upload className="w-4 h-4 mr-1" />
+                  Import
+                </Button>
+              </label>
+              <input
+                id="import-file"
+                type="file"
+                accept=".json"
+                onChange={importData}
+                className="hidden"
               />
             </div>
             
@@ -800,6 +870,17 @@ export default function MailsPage() {
                       {date}
                     </Button>
                   ))}
+                </div>
+              </div>
+              
+              <div className="border-t pt-4">
+                <h3 className="font-semibold mb-2 text-xs">💡 Sync Across Devices</h3>
+                <p className="text-xs text-gray-500 mb-2">
+                  Use Export/Import buttons above to sync your love letters across different browsers and devices.
+                </p>
+                <div className="text-xs text-gray-400 space-y-1">
+                  <p>📤 Export: Download your letters</p>
+                  <p>📥 Import: Upload from another device</p>
                 </div>
               </div>
             </div>
