@@ -33,3 +33,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./out
         cname: iloveyounanna.github.io
+        # Alternative: use personal access token
+        # personal_token: ${{ secrets.PERSONAL_TOKEN }}
