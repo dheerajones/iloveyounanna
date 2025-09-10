@@ -69,14 +69,27 @@ export default function Home() {
       </div>
 
       {/* Hero Section with Background Image */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://z-cdn-media.chatglm.cn/files/70632dd3-31d1-4d8a-ad5b-edf188b9023b_Screenshot_20241207_002444.jpg?auth_key=1788965641-9e8402d802b841a9aa53a3bbb2127946-0-9d7fcd3d8015594461e2504973639a01')`
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-pink-600/80 via-red-600/80 to-purple-600/80"></div>
+      <section className="relative min-h-screen flex items-center justify-center px-2 sm:px-4 py-10 sm:py-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <div 
+            className="absolute inset-0 hero-banner"
+            style={{
+              backgroundImage: `url('/herobanner.jpeg')`,
+              transform: 'rotate(-90deg)',
+              transformOrigin: 'center center',
+              width: '100vh',
+              height: '100vw',
+              left: '50%',
+              top: '50%',
+              marginLeft: '-50vh',
+              marginTop: '-50vw',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-600/60 via-red-600/60 to-purple-600/60"></div>
+          </div>
         </div>
         
         <div className="absolute inset-0">
@@ -93,7 +106,7 @@ export default function Home() {
             <Heart className="w-7 h-7 text-rose-400 floating-heart" fill="currentColor" />
           </div>
         </div>
-        <div className="relative z-10 text-center max-w-4xl mx-auto">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -102,12 +115,12 @@ export default function Home() {
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="inline-block mb-8"
+              className="inline-block mb-4 sm:mb-8"
             >
-              <Gift className="w-20 h-20 text-white mx-auto pulsing-heart" fill="currentColor" />
+              <Gift className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 text-white mx-auto pulsing-heart" fill="currentColor" />
             </motion.div>
             
-            <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-lg love-text">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg love-text">
               Happy Birthday Nanna
             </h1>
             
@@ -115,14 +128,14 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="mb-8"
+              className="mb-4 sm:mb-8"
             >
-              <Badge variant="secondary" className="text-2xl px-6 py-2 bg-white/90 text-pink-600 love-card">
-                To the most amazing person in my life
+              <Badge variant="secondary" className="text-sm sm:text-lg md:text-xl lg:text-2xl px-3 sm:px-6 py-1 sm:py-2 bg-white/90 text-pink-600 love-card">
+                You are the most amazing person in my life
               </Badge>
             </motion.div>
             
-            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
               Every moment with you is a treasure, every memory a beautiful story. 
               Today we celebrate you, your smile, your heart, and all the love you bring into this world.
             </p>
@@ -131,8 +144,8 @@ export default function Home() {
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <Button size="lg" className="love-button text-white text-lg px-8 py-3 rounded-full">
-                <Heart className="mr-2" fill="currentColor" />
+              <Button size="sm" className="love-button text-white text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full">
+                <Heart className="mr-2 w-4 h-4" fill="currentColor" />
                 Our Journey Together
               </Button>
             </motion.div>
@@ -141,7 +154,7 @@ export default function Home() {
       </section>
 
       {/* I LOVE YOU Section */}
-      <section className="py-20 px-4 relative love-gradient">
+      <section className="py-10 sm:py-20 px-2 sm:px-4 relative love-gradient">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -149,13 +162,13 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="mb-8">
+            <div className="mb-4 sm:mb-8">
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="inline-block"
               >
-                <div className="text-8xl md:text-9xl font-bold love-text heartbeat">
+                <div className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold love-text heartbeat">
                   I LOVE YOU ❤️
                 </div>
               </motion.div>
@@ -165,12 +178,12 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="space-y-4"
+              className="space-y-2 sm:space-y-4"
             >
-              <p className="text-2xl md:text-3xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-sm sm:text-lg md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto leading-relaxed">
                 Three simple words that hold my entire world. Three words that describe everything I feel for you.
               </p>
-              <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto">
+              <p className="text-xs sm:text-base md:text-xl lg:text-2xl text-white/80 max-w-2xl mx-auto">
                 You are my sunshine, my happiness, my reason for smiling every single day.
               </p>
               
@@ -316,7 +329,7 @@ export default function Home() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 1.2 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
@@ -380,12 +393,12 @@ export default function Home() {
             <p className="text-xl text-white/90 mb-8">
               Distance means so little when someone means so much. Here's our collection of heartfelt messages that bridge the miles between us.
             </p>
-            <Button size="lg" className="love-button text-white" asChild>
-              <a href="/iloveyounanna/mails">
-                <Mail className="mr-2" />
-                Read Our Letters
-              </a>
-            </Button>
+                    <Button size="lg" className="love-button text-white" asChild>
+                      <a href={process.env.NODE_ENV === 'production' ? "/iloveyounanna/mails" : "/mails"}>
+                        <Mail className="mr-2" />
+                        Read Our Letters
+                      </a>
+                    </Button>
           </motion.div>
         </div>
       </section>

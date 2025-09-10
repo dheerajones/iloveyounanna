@@ -648,16 +648,17 @@ export default function MailsPage() {
       </div>
       <div className="gmail-interface min-h-screen">
         <header className="gmail-header">
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" asChild>
-              <a href="/iloveyounanna/" className="flex items-center space-x-2">
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back Home</span>
-              </a>
-            </Button>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <Button variant="ghost" size="sm" asChild>
+                      <a href={process.env.NODE_ENV === 'production' ? "/iloveyounanna/" : "/"} className="flex items-center space-x-2">
+                        <ArrowLeft className="w-4 h-4" />
+                        <span className="hidden sm:inline">Back Home</span>
+                        <span className="sm:hidden">Back</span>
+                      </a>
+                    </Button>
             <div className="flex items-center space-x-2">
-              <Mail className="w-6 h-6 text-pink-500 gentle-float" />
-              <h1 className="text-2xl font-bold love-text">Our Love Letters</h1>
+              <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500 gentle-float" />
+              <h1 className="text-lg sm:text-2xl font-bold love-text">Our Love Letters</h1>
             </div>
           </div>
           
@@ -757,12 +758,12 @@ export default function MailsPage() {
             </Dialog>
           </div>
         </header>
-        <div className="flex">
-          <aside className="gmail-sidebar">
-            <div className="space-y-4">
+        <div className="flex flex-col md:flex-row">
+          <aside className="gmail-sidebar w-full md:w-64">
+            <div className="space-y-2 sm:space-y-4">
               <Button 
                 variant={selectedDate === '' ? 'default' : 'ghost'} 
-                className="w-full justify-start love-button text-white"
+                className="w-full justify-start love-button text-white text-sm"
                 onClick={() => setSelectedDate('')}
               >
                 <Inbox className="w-4 h-4 mr-2" />
@@ -803,7 +804,7 @@ export default function MailsPage() {
               </div>
             </div>
           </aside>
-          <main className="gmail-main">
+          <main className="gmail-main flex-1">
             {selectedMail ? (
               <motion.div
                 initial={{ opacity: 0, x: 20 }}

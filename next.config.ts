@@ -10,8 +10,8 @@ const nextConfig: NextConfig = {
   // GitHub Pages configuration
   output: 'export',
   trailingSlash: true,
-  // Base path for GitHub Pages subdirectory
-  basePath: '/iloveyounanna',
+  // Base path for GitHub Pages subdirectory (only for production)
+  ...(process.env.NODE_ENV === 'production' && { basePath: '/iloveyounanna' }),
   images: {
     unoptimized: true // Required for static export
   },

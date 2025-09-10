@@ -12,120 +12,105 @@ const photoData = [
   {
     id: 1,
     src: '/images/Screenshot_20240802_153412.jpg',
-    caption: 'Beautiful Selfie',
-    date: 'August 2, 2024',
+    caption: 'Radiant Beauty',
     location: 'Special Moment',
     category: 'portrait'
   },
   {
     id: 2,
     src: '/images/Screenshot_20240912_112530.jpg',
-    caption: 'Library Vibes',
-    date: 'September 12, 2024',
+    caption: 'Intellectual Grace',
     location: 'Study Session',
     category: 'lifestyle'
   },
   {
     id: 3,
     src: '/images/Screenshot_20241207_002444.jpg',
-    caption: 'Garden Beauty',
-    date: 'December 7, 2024',
+    caption: 'Nature\'s Muse',
     location: 'Nature Walk',
     category: 'nature'
   },
   {
     id: 4,
     src: '/images/Screenshot_20241207_002504.jpg',
-    caption: 'Park Moments',
-    date: 'December 7, 2024',
+    caption: 'Garden Goddess',
     location: 'Evening Stroll',
     category: 'nature'
   },
   {
     id: 5,
     src: '/images/Snapchat-530430530.jpg',
-    caption: 'Outdoor Walk',
-    date: 'Adventure Day',
+    caption: 'Adventure Queen',
     location: 'Exploring Together',
     category: 'adventure'
   },
   {
     id: 6,
     src: '/images/Snapchat-771023813.jpg',
-    caption: 'Golden Hour',
-    date: 'Perfect Timing',
+    caption: 'Golden Hour Angel',
     location: 'Sunset Magic',
     category: 'golden'
   },
   {
     id: 7,
     src: '/images/Snapchat-1232431141.jpg',
-    caption: 'Casual Day',
-    date: 'Relaxed Moments',
+    caption: 'Casual Elegance',
     location: 'Comfort Zone',
     category: 'casual'
   },
   {
     id: 8,
     src: '/images/Snapchat-1973358956.jpg',
-    caption: 'Traditional Beauty',
-    date: 'Cultural Moment',
+    caption: 'Traditional Princess',
     location: 'Heritage',
     category: 'traditional'
   },
   {
     id: 9,
     src: '/images/Snapchat-1977403721.jpg',
-    caption: 'Sweet Moments',
-    date: 'Tender Times',
+    caption: 'Sweet Angel',
     location: 'Heart to Heart',
     category: 'romantic'
   },
   {
     id: 10,
     src: '/images/IMG20250813112650.jpg',
-    caption: 'Street Style',
-    date: 'August 13, 2025',
+    caption: 'Fashion Icon',
     location: 'Urban Adventure',
     category: 'fashion'
   },
   {
     id: 11,
     src: '/images/IMG20240804211231.jpg',
-    caption: 'Evening Glow',
-    date: 'August 4, 2024',
+    caption: 'Evening Star',
     location: 'Twilight Magic',
     category: 'evening'
   },
   {
     id: 12,
     src: '/images/IMG20240804221103.jpg',
-    caption: 'Night Vibes',
-    date: 'August 4, 2024',
+    caption: 'Night Beauty',
     location: 'Late Night',
     category: 'night'
   },
   {
     id: 13,
     src: '/images/IMG20240907115728.jpg',
-    caption: 'Morning Light',
-    date: 'September 7, 2024',
+    caption: 'Morning Sunshine',
     location: 'Fresh Start',
     category: 'morning'
   },
   {
     id: 14,
     src: '/images/IMG20240907132447.jpg',
-    caption: 'Afternoon Bliss',
-    date: 'September 7, 2024',
+    caption: 'Afternoon Grace',
     location: 'Peaceful Moment',
     category: 'afternoon'
   },
   {
     id: 15,
     src: '/images/IMG_20250320_174632.jpg',
-    caption: 'Spring Joy',
-    date: 'March 20, 2025',
+    caption: 'Spring Goddess',
     location: 'Seasonal Beauty',
     category: 'seasonal'
   }
@@ -171,7 +156,7 @@ export default function EnhancedPhotoGallery() {
   if (!mounted) return null
 
   return (
-    <section className="py-20 px-4 relative romantic-gradient">
+    <section className="py-10 sm:py-20 px-2 sm:px-4 relative romantic-gradient">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -179,22 +164,22 @@ export default function EnhancedPhotoGallery() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="inline-block mb-6"
+            className="inline-block mb-4 sm:mb-6"
           >
-            <Camera className="w-16 h-16 text-pink-500 mx-auto pulsing-heart" />
+            <Camera className="w-12 h-12 sm:w-16 sm:h-16 text-pink-500 mx-auto pulsing-heart" />
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 love-text">
-            Our Beautiful Journey
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 sm:mb-6 love-text">
+            Her Stunning Collection
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Every photo tells a story, every moment captures our love. Here's our collection of precious memories, 
-            each one a testament to the beautiful journey we're on together.
+          <p className="text-sm sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-6 sm:mb-8">
+            Every photo showcases your incredible beauty, every moment captures your grace. 
+            Here's a celebration of the most beautiful woman in the world.
           </p>
         </motion.div>
 
@@ -224,7 +209,7 @@ export default function EnhancedPhotoGallery() {
         </motion.div>
 
         {/* Photo Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
           {filteredPhotos.map((photo, index) => (
             <motion.div
               key={photo.id}
@@ -236,19 +221,15 @@ export default function EnhancedPhotoGallery() {
               onClick={() => openModal(photo, index)}
             >
               <Card className="overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105 love-card">
-                <div className="aspect-square overflow-hidden relative">
+                <div className="image-container">
                   <img
                     src={photo.src}
                     alt={photo.caption}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 photo-hover"
+                    className="dynamic-image"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="flex items-center space-x-2 text-white text-sm">
-                      <Calendar className="w-4 h-4" />
-                      <span>{photo.date}</span>
-                    </div>
                     <div className="flex items-center space-x-2 text-white text-sm mt-1">
                       <MapPin className="w-4 h-4" />
                       <span>{photo.location}</span>
@@ -350,6 +331,14 @@ export default function EnhancedPhotoGallery() {
                 src={selectedPhoto.src}
                 alt={selectedPhoto.caption}
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                  maxWidth: '100%',
+                  maxHeight: '80vh',
+                  objectFit: 'contain',
+                  objectPosition: 'center'
+                }}
               />
 
               {/* Image Info */}
@@ -358,10 +347,6 @@ export default function EnhancedPhotoGallery() {
                   <div>
                     <h3 className="text-xl font-bold">{selectedPhoto.caption}</h3>
                     <div className="flex items-center space-x-4 text-sm mt-2">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{selectedPhoto.date}</span>
-                      </div>
                       <div className="flex items-center space-x-1">
                         <MapPin className="w-4 h-4" />
                         <span>{selectedPhoto.location}</span>

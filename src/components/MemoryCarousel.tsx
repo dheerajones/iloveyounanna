@@ -5,50 +5,51 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Heart, ChevronLeft, ChevronRight, Play, Pause, Volume2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 // Carousel data with your beautiful images
 const carouselData = [
   {
     id: 1,
     image: '/images/Screenshot_20240802_153412.jpg',
-    title: 'The Beginning',
-    subtitle: 'Where our story started',
-    quote: 'Every love story is beautiful, but ours is my favorite.'
+    title: 'Her Stunning Smile',
+    subtitle: 'A smile that lights up the world',
+    quote: 'Your beauty is beyond words, your smile is pure magic.'
   },
   {
     id: 2,
     image: '/images/IMG20240804211231.jpg',
-    title: 'Evening Magic',
-    subtitle: 'Twilight moments together',
-    quote: 'In your eyes, I found my home.'
+    title: 'Evening Goddess',
+    subtitle: 'Twilight perfection personified',
+    quote: 'You are the most beautiful woman I have ever seen.'
   },
   {
     id: 3,
     image: '/images/Screenshot_20240912_112530.jpg',
-    title: 'Study Sessions',
-    subtitle: 'Learning and growing together',
-    quote: 'You make even the ordinary moments extraordinary.'
+    title: 'Intellectual Beauty',
+    subtitle: 'Grace and intelligence combined',
+    quote: 'Your mind is as beautiful as your face.'
   },
   {
     id: 4,
     image: '/images/Screenshot_20241207_002444.jpg',
-    title: 'Nature Walks',
-    subtitle: 'Exploring beauty together',
-    quote: 'With you, every path leads to paradise.'
+    title: 'Nature\'s Masterpiece',
+    subtitle: 'Beauty that rivals nature itself',
+    quote: 'You make flowers jealous with your natural beauty.'
   },
   {
     id: 5,
     image: '/images/IMG_20250320_174632.jpg',
-    title: 'Spring Awakening',
-    subtitle: 'New beginnings',
-    quote: 'Like spring, our love blooms endlessly.'
+    title: 'Spring\'s Muse',
+    subtitle: 'Fresh and radiant like morning dew',
+    quote: 'Your beauty renews my soul every day.'
   },
   {
     id: 6,
     image: '/images/IMG20250813112650.jpg',
-    title: 'Urban Adventures',
-    subtitle: 'City explorations',
-    quote: 'In the city of dreams, you are my reality.'
+    title: 'Urban Angel',
+    subtitle: 'Style and grace in every step',
+    quote: 'You turn every street into a runway.'
   }
 ]
 
@@ -94,7 +95,7 @@ export default function MemoryCarousel() {
   const currentSlide = carouselData[currentIndex]
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden">
+    <section className="py-10 sm:py-20 px-2 sm:px-4 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-gradient-to-br from-pink-500 via-red-500 to-purple-500"></div>
@@ -107,28 +108,28 @@ export default function MemoryCarousel() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
           <motion.div
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="inline-block mb-6"
+            className="inline-block mb-4 sm:mb-6"
           >
-            <Heart className="w-16 h-16 text-pink-500 mx-auto pulsing-heart" fill="currentColor" />
+            <Heart className="w-12 h-12 sm:w-16 sm:h-16 text-pink-500 mx-auto pulsing-heart" fill="currentColor" />
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 love-text">
-            Memory Carousel
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 sm:mb-6 love-text">
+            Her Radiant Gallery
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Take a journey through our most precious moments. Each memory is a chapter in our beautiful love story.
+          <p className="text-sm sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            A celebration of the most beautiful woman in the world. Each photo showcases your incredible beauty and grace.
           </p>
         </motion.div>
 
         {/* Carousel Container */}
         <div className="relative">
           {/* Main Carousel */}
-          <div className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="relative h-[300px] sm:h-[400px] md:h-[600px] lg:h-[700px] rounded-2xl overflow-hidden shadow-2xl">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -141,33 +142,37 @@ export default function MemoryCarousel() {
                 {/* Background Image */}
                 <div 
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${currentSlide.image})` }}
+                  style={{ 
+                    backgroundImage: `url(${currentSlide.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center center'
+                  }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                 </div>
 
                 {/* Content Overlay */}
                 <div className="absolute inset-0 flex items-end">
-                  <div className="p-8 md:p-12 w-full">
+                  <div className="p-4 sm:p-6 md:p-8 lg:p-12 w-full">
                     <motion.div
                       initial={{ opacity: 0, y: 50 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
                     >
                       <div className="max-w-3xl">
-                        <Badge className="mb-4 bg-pink-500 text-white">
+                        <Badge className="mb-2 sm:mb-4 bg-pink-500 text-white text-xs sm:text-sm">
                           Memory {currentIndex + 1} of {carouselData.length}
                         </Badge>
                         
-                        <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                        <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
                           {currentSlide.title}
                         </h3>
                         
-                        <p className="text-xl md:text-2xl text-white/90 mb-6">
+                        <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-3 sm:mb-6">
                           {currentSlide.subtitle}
                         </p>
                         
-                        <blockquote className="text-lg md:text-xl text-white/80 italic border-l-4 border-pink-400 pl-6">
+                        <blockquote className="text-xs sm:text-sm md:text-lg lg:text-xl text-white/80 italic border-l-4 border-pink-400 pl-3 sm:pl-6">
                           "{currentSlide.quote}"
                         </blockquote>
                       </div>
@@ -228,7 +233,13 @@ export default function MemoryCarousel() {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="w-full h-full object-cover"
+                  className="dynamic-image"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
                 />
                 {index === currentIndex && (
                   <div className="absolute inset-0 bg-pink-500/20 flex items-center justify-center">

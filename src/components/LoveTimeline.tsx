@@ -10,63 +10,56 @@ import { Badge } from '@/components/ui/badge'
 const timelineData = [
   {
     id: 1,
-    date: 'August 2, 2024',
-    title: 'First Beautiful Selfie',
-    description: 'The moment that started it all - your beautiful smile captured forever.',
+    title: 'Her Radiant Beauty',
+    description: 'Your stunning smile lights up every room and captures hearts effortlessly.',
     image: '/images/Screenshot_20240802_153412.jpg',
     category: 'milestone',
     location: 'Special Moment'
   },
   {
     id: 2,
-    date: 'August 4, 2024',
-    title: 'Evening Magic',
-    description: 'Two perfect evenings that showed us the beauty in simple moments together.',
+    title: 'Evening Goddess',
+    description: 'You transform ordinary evenings into magical moments with your enchanting presence.',
     image: '/images/IMG20240804211231.jpg',
     category: 'romantic',
     location: 'Twilight Hours'
   },
   {
     id: 3,
-    date: 'September 7, 2024',
-    title: 'Morning to Afternoon Bliss',
-    description: 'A day filled with light, laughter, and the joy of being together.',
+    title: 'Morning Sunshine',
+    description: 'Your natural beauty shines brighter than any sunrise, bringing joy to every day.',
     image: '/images/IMG20240907115728.jpg',
     category: 'adventure',
     location: 'Full Day Together'
   },
   {
     id: 4,
-    date: 'September 12, 2024',
-    title: 'Study Session Love',
-    description: 'Even studying becomes beautiful when we do it together.',
+    title: 'Intellectual Beauty',
+    description: 'Your intelligence and grace make even the most mundane activities feel special.',
     image: '/images/Screenshot_20240912_112530.jpg',
     category: 'lifestyle',
     location: 'Learning Together'
   },
   {
     id: 5,
-    date: 'December 7, 2024',
-    title: 'Nature Walk Romance',
-    description: 'Two magical moments in nature, surrounded by beauty and love.',
+    title: 'Nature\'s Masterpiece',
+    description: 'You blend perfectly with nature\'s beauty, creating scenes more beautiful than any painting.',
     image: '/images/Screenshot_20241207_002444.jpg',
     category: 'nature',
     location: 'Garden Paradise'
   },
   {
     id: 6,
-    date: 'March 20, 2025',
-    title: 'Spring Awakening',
-    description: 'Spring brought new beginnings and renewed love.',
+    title: 'Spring\'s Muse',
+    description: 'Like spring itself, you bring renewal, hope, and endless beauty wherever you go.',
     image: '/images/IMG_20250320_174632.jpg',
     category: 'seasonal',
     location: 'Spring Joy'
   },
   {
     id: 7,
-    date: 'August 13, 2025',
-    title: 'Street Style Adventure',
-    description: 'Urban exploration with the most beautiful companion.',
+    title: 'Urban Angel',
+    description: 'You make city streets look like runways with your effortless style and grace.',
     image: '/images/IMG20250813112650.jpg',
     category: 'fashion',
     location: 'City Streets'
@@ -93,7 +86,7 @@ export default function LoveTimeline() {
   if (!mounted) return null
 
   return (
-    <section className="py-20 px-4 relative love-gradient">
+    <section className="py-10 sm:py-20 px-2 sm:px-4 relative love-gradient">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -101,29 +94,29 @@ export default function LoveTimeline() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
           <motion.div
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="inline-block mb-6"
+            className="inline-block mb-4 sm:mb-6"
           >
-            <Heart className="w-16 h-16 text-white mx-auto pulsing-heart" fill="currentColor" />
+            <Heart className="w-12 h-12 sm:w-16 sm:h-16 text-white mx-auto pulsing-heart" fill="currentColor" />
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Our Love Timeline
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+            Her Timeless Beauty
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Every moment is a milestone, every memory a treasure. Here's our beautiful journey through time, 
-            captured in the most precious moments of our love story.
+          <p className="text-sm sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+            Every photo captures your incredible beauty, every moment showcases your grace. 
+            Here's a celebration of the most beautiful woman in the world.
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-white/30 rounded-full"></div>
+          <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-white/30 rounded-full"></div>
           
           {timelineData.map((item, index) => (
             <motion.div
@@ -132,8 +125,8 @@ export default function LoveTimeline() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className={`relative flex items-center mb-16 ${
-                index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+              className={`relative flex flex-col md:flex-row items-center mb-8 sm:mb-12 md:mb-16 ${
+                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               }`}
             >
               {/* Timeline Dot */}
@@ -142,14 +135,15 @@ export default function LoveTimeline() {
               </div>
 
               {/* Content */}
-              <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
+              <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'} mt-4 md:mt-0`}>
                 <Card className="love-card overflow-hidden group hover:shadow-2xl transition-all duration-300">
-                  <div className="aspect-video overflow-hidden">
+                  <div className="image-container">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="dynamic-image"
                       loading="lazy"
+                      style={{ maxHeight: '250px' }}
                     />
                   </div>
                   <CardContent className="p-6">
@@ -159,10 +153,6 @@ export default function LoveTimeline() {
                       >
                         {item.category}
                       </Badge>
-                      <div className="flex items-center space-x-1 text-gray-500 text-sm">
-                        <Calendar className="w-4 h-4" />
-                        <span>{item.date}</span>
-                      </div>
                     </div>
                     
                     <h3 className="text-xl font-bold text-gray-800 mb-2">
@@ -181,15 +171,6 @@ export default function LoveTimeline() {
                 </Card>
               </div>
 
-              {/* Date Badge */}
-              <div className={`absolute top-4 ${index % 2 === 0 ? 'right-8' : 'left-8'} z-20`}>
-                <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                  <div className="flex items-center space-x-2 text-gray-700">
-                    <Clock className="w-4 h-4" />
-                    <span className="font-medium">{item.date}</span>
-                  </div>
-                </div>
-              </div>
             </motion.div>
           ))}
         </div>
@@ -214,9 +195,9 @@ export default function LoveTimeline() {
               <div className="text-white/80">Love Multiplied</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-              <Calendar className="w-8 h-8 text-blue-400 mx-auto mb-2 gentle-float" />
-              <div className="text-2xl font-bold text-white">365+</div>
-              <div className="text-white/80">Days of Love</div>
+              <Heart className="w-8 h-8 text-blue-400 mx-auto mb-2 gentle-float" />
+              <div className="text-2xl font-bold text-white">∞</div>
+              <div className="text-white/80">Beauty Beyond Measure</div>
             </div>
           </div>
         </motion.div>
