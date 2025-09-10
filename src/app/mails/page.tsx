@@ -439,7 +439,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Heart, Mail, Calendar, Plus, Search, ArrowLeft, Inbox, Star, User, Trash2 } from 'lucide-react'
+import { Heart, Mail, Calendar, Plus, Search, ArrowLeft, Inbox, Star, User, Trash2, Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -448,6 +448,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { Calendar as CalendarComponent } from '@/components/ui/calendar'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { format } from 'date-fns'
+import { cn } from '@/lib/utils'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -470,6 +474,7 @@ interface Mail {
   timestamp: string
   starred: boolean
   read: boolean
+  customDate?: Date
 }
 
 const sampleMails: Mail[] = [
@@ -541,7 +546,8 @@ export default function MailsPage() {
     from: '',
     to: '',
     subject: '',
-    content: ''
+    content: '',
+    customDate: new Date()
   })
 
   useEffect(() => {
@@ -574,20 +580,21 @@ export default function MailsPage() {
     if (newMail.from && newMail.to && newMail.subject && newMail.content) {
       const mail: Mail = {
         id: Date.now().toString(),
-        date: new Date().toISOString().split('T')[0],
+        date: format(newMail.customDate, 'yyyy-MM-dd'),
         from: newMail.from,
         to: newMail.to,
         subject: newMail.subject,
         content: newMail.content,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         starred: false,
-        read: false
+        read: false,
+        customDate: newMail.customDate
       }
       const updatedMails = [...mails, mail]
       setMails(updatedMails)
       localStorage.setItem('loveLetters', JSON.stringify(updatedMails))
       
-      setNewMail({ from: '', to: '', subject: '', content: '' })
+      setNewMail({ from: '', to: '', subject: '', content: '', customDate: new Date() })
       setIsAddDialogOpen(false)
     }
   }
@@ -603,6 +610,14 @@ export default function MailsPage() {
   const markAsRead = (mailId: string) => {
     const updatedMails = mails.map(mail => 
       mail.id === mailId ? { ...mail, read: true } : mail
+    )
+    setMails(updatedMails)
+    localStorage.setItem('loveLetters', JSON.stringify(updatedMails))
+  }
+
+  const toggleReadStatus = (mailId: string) => {
+    const updatedMails = mails.map(mail => 
+      mail.id === mailId ? { ...mail, read: !mail.read } : mail
     )
     setMails(updatedMails)
     localStorage.setItem('loveLetters', JSON.stringify(updatedMails))
@@ -708,6 +723,31 @@ export default function MailsPage() {
                       rows={6}
                     />
                   </div>
+                  <div>
+                    <Label htmlFor="date">Date</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full justify-start text-left font-normal",
+                            !newMail.customDate && "text-muted-foreground"
+                          )}
+                        >
+                          <Calendar className="mr-2 h-4 w-4" />
+                          {newMail.customDate ? format(newMail.customDate, "PPP") : "Pick a date"}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <CalendarComponent
+                          mode="single"
+                          selected={newMail.customDate}
+                          onSelect={(date) => setNewMail({...newMail, customDate: date || new Date()})}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
                   <Button onClick={handleAddMail} className="w-full love-button text-white">
                     <Heart className="w-4 h-4 mr-2" fill="currentColor" />
                     Send Love Letter
@@ -735,6 +775,14 @@ export default function MailsPage() {
               >
                 <Star className="w-4 h-4 mr-2" />
                 Starred ({mails.filter(m => m.starred).length})
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start"
+              >
+                <EyeOff className="w-4 h-4 mr-2" />
+                Unread ({mails.filter(m => !m.read).length})
               </Button>
               <div className="border-t pt-4">
                 <h3 className="font-semibold mb-2">Filter by Date</h3>
@@ -776,6 +824,18 @@ export default function MailsPage() {
                       onClick={() => toggleStar(selectedMail.id)}
                     >
                       <Star className={`w-4 h-4 ${selectedMail.starred ? 'fill-yellow-400 text-yellow-400' : ''}`} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => toggleReadStatus(selectedMail.id)}
+                      title={selectedMail.read ? "Mark as unread" : "Mark as read"}
+                    >
+                      {selectedMail.read ? (
+                        <Eye className="w-4 h-4 text-green-500" />
+                      ) : (
+                        <EyeOff className="w-4 h-4 text-gray-400" />
+                      )}
                     </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
@@ -879,6 +939,21 @@ export default function MailsPage() {
                             }}
                           >
                             <Star className={`w-4 h-4 ${mail.starred ? 'fill-yellow-400 text-yellow-400' : ''}`} />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleReadStatus(mail.id)
+                            }}
+                            title={mail.read ? "Mark as unread" : "Mark as read"}
+                          >
+                            {mail.read ? (
+                              <Eye className="w-4 h-4 text-green-500" />
+                            ) : (
+                              <EyeOff className="w-4 h-4 text-gray-400" />
+                            )}
                           </Button>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
