@@ -108,7 +108,7 @@ export default function Home() {
             </motion.div>
             
             <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-lg love-text">
-              Happy Birthday
+              Happy Birthday Nanna
             </h1>
             
             <motion.div
