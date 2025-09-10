@@ -7,62 +7,11 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ThemeToggle } from '@/components/theme-toggle'
-
-const photos = [
-  {
-    id: 1,
-    url: "https://z-cdn-media.chatglm.cn/files/88c37c1c-a00a-45f2-9ef5-8ed189af7836_Screenshot_20240802_153412.jpg?auth_key=1788965641-ac9b19645821454b91d6151a70799829-0-3ab8009b037c8b2e1e16ae87a15f1e13",
-    caption: "Beautiful Selfie"
-  },
-  {
-    id: 2,
-    url: "https://z-cdn-media.chatglm.cn/files/a3784afa-f1c9-4c58-a852-bb1f2a2689c7_Screenshot_20240912_112530.jpg?auth_key=1788965641-afcd6c17a09343eaa16b4c40f3ab55c7-0-5a9c71c111bd15cdb1e99204401607ab",
-    caption: "Library Vibes"
-  },
-  {
-    id: 3,
-    url: "https://z-cdn-media.chatglm.cn/files/70632dd3-31d1-4d8a-ad5b-edf188b9023b_Screenshot_20241207_002444.jpg?auth_key=1788965641-9e8402d802b841a9aa53a3bbb2127946-0-9d7fcd3d8015594461e2504973639a01",
-    caption: "Garden Beauty"
-  },
-  {
-    id: 4,
-    url: "https://z-cdn-media.chatglm.cn/files/124f2272-936e-41b8-a30c-6455f243a4d2_Screenshot_20241207_002504.jpg?auth_key=1788965641-03a5c046ab8c4245a147061f50886744-0-b93626ab403c74cb5234157e2f889fde",
-    caption: "Park Moments"
-  },
-  {
-    id: 5,
-    url: "https://z-cdn-media.chatglm.cn/files/f77e0942-acc0-48b8-a7f3-0a098e7e7b88_Snapchat-530430530.jpg?auth_key=1788965641-025862cf8fc446c3b504d682736bda32-0-a3d1b6a55c1c6ff51a5b7c5c9c2aad33",
-    caption: "Outdoor Walk"
-  },
-  {
-    id: 6,
-    url: "https://z-cdn-media.chatglm.cn/files/3884a361-0ff3-4f56-bde5-d2bfe91352e7_Snapchat-771023813.jpg?auth_key=1788965641-7db752f9874a4de185128192f806c56d-0-b5c79a8453f03886f17c9f9e56373bfc",
-    caption: "Golden Hour"
-  },
-  {
-    id: 7,
-    url: "https://z-cdn-media.chatglm.cn/files/6de74ca3-24a9-411a-a4e5-d87027ea7d5a_Snapchat-1232431141.jpg?auth_key=1788965641-8d21fc9e21ec4b49b96bb55c49711307-0-07ed0154f5df92a95ed57f29b85aa6a8",
-    caption: "Casual Day"
-  },
-  {
-    id: 8,
-    url: "https://z-cdn-media.chatglm.cn/files/2a95f4f6-cac6-4145-b5ef-1ebc8a03361e_Snapchat-1973358956.jpg?auth_key=1788965641-0119ff0aa98c4b88a483065a5f4054c8-0-c82e04318ad95ab12a96a162412a84a8",
-    caption: "Traditional Beauty"
-  },
-  {
-    id: 9,
-    url: "https://z-cdn-media.chatglm.cn/files/870f0fd3-866d-474f-bf15-800e6b3a2e0d_Snapchat-1977403721.jpg?auth_key=1788965641-e1640f4818ec4021922fba8c46fd00ae-0-dfd23ce31a37e7377f19e93547e7b13d",
-    caption: "Sweet Moments"
-  },
-  {
-    id: 10,
-    url: "https://z-cdn-media.chatglm.cn/files/d658b211-92f1-4511-b24d-c5bc35b918d2_IMG20250813112650.jpg?auth_key=1788965641-0d0133599fb94128b21f27ebf064e716-0-8b65e027217c908f6634963c9d8c53ac",
-    caption: "Street Style"
-  }
-]
+import EnhancedPhotoGallery from '@/components/EnhancedPhotoGallery'
+import LoveTimeline from '@/components/LoveTimeline'
+import MemoryCarousel from '@/components/MemoryCarousel'
 
 export default function Home() {
-  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null)
 
   const [mounted, setMounted] = useState(false)
 
@@ -406,52 +355,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Photo Gallery Section */}
-      <section className="py-20 px-4 relative romantic-gradient">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 love-text">
-              Beautiful Memories
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Capturing moments of joy, love, and happiness. Each photo tells a story of our amazing journey together.
-            </p>
-          </motion.div>
+      {/* Memory Carousel Section */}
+      <MemoryCarousel />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {photos.map((photo, index) => (
-              <motion.div
-                key={photo.id}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group cursor-pointer"
-                onClick={() => setSelectedPhoto(photo.id)}
-              >
-                <Card className="overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105 love-card">
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={photo.url}
-                      alt={photo.caption}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 photo-hover"
-                    />
-                  </div>
-                  <CardContent className="p-4">
-                    <p className="text-center font-medium text-gray-700">{photo.caption}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Enhanced Photo Gallery Section */}
+      <EnhancedPhotoGallery />
+
+      {/* Love Timeline Section */}
+      <LoveTimeline />
 
       {/* Love Letters Section */}
       <section className="py-20 px-4 love-gradient">
@@ -500,18 +411,6 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Photo Modal */}
-      {selectedPhoto && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedPhoto(null)}>
-          <div className="max-w-4xl max-h-[90vh]">
-            <img
-              src={photos.find(p => p.id === selectedPhoto)?.url}
-              alt=""
-              className="max-w-full max-h-full object-contain"
-            />
-          </div>
-        </div>
-      )}
     </div>
   )
 }
